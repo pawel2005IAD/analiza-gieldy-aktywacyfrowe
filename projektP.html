@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Paweł Zdanowski">
+
+<title>Zmienność rynkowa indeksu S&amp;P 500 i aktywów cyfrowych – analiza porównawcza</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="projektP_files/libs/clipboard/clipboard.min.js"></script>
+<script src="projektP_files/libs/quarto-html/quarto.js"></script>
+<script src="projektP_files/libs/quarto-html/popper.min.js"></script>
+<script src="projektP_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="projektP_files/libs/quarto-html/anchor.min.js"></script>
+<link href="projektP_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="projektP_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="projektP_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="projektP_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="projektP_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Spis treści</h2>
+   
+  <ul>
+  <li><a href="#wstęp-i-cel-badania" id="toc-wstęp-i-cel-badania" class="nav-link active" data-scroll-target="#wstęp-i-cel-badania"><span class="header-section-number">1</span> Wstęp i cel badania</a></li>
+  <li><a href="#dane" id="toc-dane" class="nav-link" data-scroll-target="#dane"><span class="header-section-number">2</span> Dane</a></li>
+  <li><a href="#analiza-porównawcza-stóp-zwrotu-aktywa-cyfrowe-vs.-rynek-kapitałowy" id="toc-analiza-porównawcza-stóp-zwrotu-aktywa-cyfrowe-vs.-rynek-kapitałowy" class="nav-link" data-scroll-target="#analiza-porównawcza-stóp-zwrotu-aktywa-cyfrowe-vs.-rynek-kapitałowy"><span class="header-section-number">3</span> Analiza porównawcza stóp zwrotu: Aktywa cyfrowe vs.&nbsp;Rynek kapitałowy</a></li>
+  <li><a href="#dzienna-zmienność-kryptowalut-jest-wyższa-niż-zmienność-indeksu-sp-500." id="toc-dzienna-zmienność-kryptowalut-jest-wyższa-niż-zmienność-indeksu-sp-500." class="nav-link" data-scroll-target="#dzienna-zmienność-kryptowalut-jest-wyższa-niż-zmienność-indeksu-sp-500."><span class="header-section-number">4</span> Dzienna zmienność kryptowalut jest wyższa niż zmienność indeksu S&amp;P 500.</a></li>
+  <li><a href="#pandemia-covid-19-jako-katalizator-bezprecedensowej-hossy-rynkowej" id="toc-pandemia-covid-19-jako-katalizator-bezprecedensowej-hossy-rynkowej" class="nav-link" data-scroll-target="#pandemia-covid-19-jako-katalizator-bezprecedensowej-hossy-rynkowej"><span class="header-section-number">5</span> Pandemia COVID-19 jako katalizator bezprecedensowej hossy rynkowej</a></li>
+  <li><a href="#czy-aktywa-cyfrowe-coraz-bardziej-przypominają-rynek-kapitałowy" id="toc-czy-aktywa-cyfrowe-coraz-bardziej-przypominają-rynek-kapitałowy" class="nav-link" data-scroll-target="#czy-aktywa-cyfrowe-coraz-bardziej-przypominają-rynek-kapitałowy"><span class="header-section-number">6</span> Czy Aktywa cyfrowe coraz bardziej przypominają Rynek kapitałowy</a></li>
+  <li><a href="#analiza-częstotliwości-występowania-ekstremalnych-szoków-rynkowych" id="toc-analiza-częstotliwości-występowania-ekstremalnych-szoków-rynkowych" class="nav-link" data-scroll-target="#analiza-częstotliwości-występowania-ekstremalnych-szoków-rynkowych"><span class="header-section-number">7</span> Analiza częstotliwości występowania ekstremalnych szoków rynkowych</a></li>
+  <li><a href="#analiza-odporności-na-straty-jak-duże-były-spadki-kapitału-i-jak-długo-trwało-ich-odrobienie." id="toc-analiza-odporności-na-straty-jak-duże-były-spadki-kapitału-i-jak-długo-trwało-ich-odrobienie." class="nav-link" data-scroll-target="#analiza-odporności-na-straty-jak-duże-były-spadki-kapitału-i-jak-długo-trwało-ich-odrobienie."><span class="header-section-number">8</span> <strong>Analiza odporności na straty</strong> – jak duże były spadki kapitału i jak długo trwało ich odrobienie.</a></li>
+  <li><a href="#akcje-i-kryptowaluty-jako-komplementarne-elementy-portfela-inwestycyjnego" id="toc-akcje-i-kryptowaluty-jako-komplementarne-elementy-portfela-inwestycyjnego" class="nav-link" data-scroll-target="#akcje-i-kryptowaluty-jako-komplementarne-elementy-portfela-inwestycyjnego"><span class="header-section-number">9</span> Akcje i kryptowaluty jako komplementarne elementy portfela inwestycyjnego</a></li>
+  <li><a href="#bezpieczeństwo-lokaty-bankowej-a-potencjał-rynku-giełdowego" id="toc-bezpieczeństwo-lokaty-bankowej-a-potencjał-rynku-giełdowego" class="nav-link" data-scroll-target="#bezpieczeństwo-lokaty-bankowej-a-potencjał-rynku-giełdowego"><span class="header-section-number">10</span> Bezpieczeństwo lokaty bankowej a potencjał rynku giełdowego</a></li>
+  <li><a href="#podsumowanie" id="toc-podsumowanie" class="nav-link" data-scroll-target="#podsumowanie"><span class="header-section-number">11</span> Podsumowanie</a></li>
+  <li><a href="#bibliografia" id="toc-bibliografia" class="nav-link" data-scroll-target="#bibliografia"><span class="header-section-number">12</span> Bibliografia</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Zmienność rynkowa indeksu S&amp;P 500 i aktywów cyfrowych – analiza porównawcza</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Paweł Zdanowski </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="wstęp-i-cel-badania" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Wstęp i cel badania</h1>
+<p>Niniejszy projekt stanowi szczegółowe porównawnanie dynamiki zmian na tradycyjnym amerykańskim rynku kapitałowym oraz rodzącym się rynku aktywów cyfrowych w latach 2015–2023. Głównym celem pracy jest analiza zmienności (<em>volatility</em>) spółek wchodzących w skład indeksu S&amp;P 500 oraz zestawienie tych wyników z trendami panującymi na rynku kryptowalut. Badanie opiera się na dwóch komplementarnych filarach danych: obszernym zbiorze historycznym dla ponad 500 spółek giełdowych oraz danych rynkowych dla Bitcoina, Litecoina i Ethereum, pobranych bezpośrednio z serwisu Yahoo Finance przy użyciu biblioteki <code>tidyquant</code>. Kluczowym wskaźnikiem poddanym analizie jest zmienność dzienna, zdefiniowana jako różnica między ceną najwyższą a najniższą, zewzględu na znaczące różnice w wartościach nominalnych badanych aktywów (od kilku do kilkudziesięciu tysięcy dolarów), dokonano normalizacji cen do bazy 100. Dzięki temu wykresy nie pokazują ceny w walucie, lecz dynamikę procentową zmian.Zwerifikuję osiem następujących pytań oraz hipotez badawczych:</p>
+<ul>
+<li><p><strong>Zyski: Aktywa cyfrowe vs.&nbsp;Rynek kapitałowy</strong> – porównanie stóp zwrotu.</p></li>
+<li><p><strong>Zmienność dzienna</strong> – porównanie stabilności S&amp;P 500 i Aktywów cyfrowych</p></li>
+<li><p><strong>Wpływ pandemii COVID-19</strong> – mechanizm katalizatora wzrostów rynkowych.</p></li>
+<li><p><strong>Konwergencja rynków</strong>– czy Aktywa cyfrowa upodabnia się do giełdy tradycyjnej</p></li>
+<li><p><strong>Ekstremalne szoki rynkowe</strong> – analiza częstotliwości</p></li>
+<li><p><strong>Analiza Drawdown</strong> – głębokość spadków i czas odrabiania strat.</p></li>
+<li><p><strong>Korelacja i portfel mieszany</strong> – czy warto łączyć akcje z kryptowalutami?</p></li>
+<li><p><strong>Lokata bankowa a rynkek giełdowy</strong> – bezpieczeństwo kontra potencjał wzrostu.</p></li>
+<li><p><strong>Podsumowanie i wnioski</strong> – rekomendacje dla inwestora.</p></li>
+</ul>
+</section>
+<section id="dane" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Dane</h1>
+<p><strong>symbol-</strong>Nazwa instrumentu finansowego</p>
+<p><strong>date</strong>-Data Notowania</p>
+<p><strong>close</strong>- Dzienna cena zamknięcia instrumentu finansowego</p>
+<p><strong>volatility_usd</strong>-Bezwzględna zmienność dzienna</p>
+<p><strong>index_price</strong>-Znormalizowana cena startująca od poziomu 100 punktów</p>
+</section>
+<section id="analiza-porównawcza-stóp-zwrotu-aktywa-cyfrowe-vs.-rynek-kapitałowy" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Analiza porównawcza stóp zwrotu: Aktywa cyfrowe vs.&nbsp;Rynek kapitałowy</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projektP_files/figure-html/unnamed-chunk-2-1.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>W tej części sprawdzamy, ile zarobilibyśmy inwestując w 2015 roku w każdy z instrumentów. Animacja pokazuje wyraźną przepaść: podczas gdy S&amp;P 500 rośnie stabilnie i powoli, Bitcoin oraz Ethereum charakteryzują się gwałtownymi i bardzo stromymi skokami wartości. Mimo drastycznych spadków po drodze, ich ostateczny zysk wielokrotnie przewyższa wyniki tradycyjnej giełdy. Hipoteza została potwierdzona: rynek cyfrowy oferuje stopy zwrotu nieosiągalne dla tradycyjnych akcji, choć wiąże się to z ogromnymi wahaniami kursu.</p>
+</section>
+<section id="dzienna-zmienność-kryptowalut-jest-wyższa-niż-zmienność-indeksu-sp-500." class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Dzienna zmienność kryptowalut jest wyższa niż zmienność indeksu S&amp;P 500.</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projektP_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Wykres jednoznacznie obrazuje kolosalną różnicę w poziomie ryzyka między badanymi klasami aktywów. Indeks S&amp;P 500 wykazuje minimalne wahania dzienne, co czyni go aktywem stabilnym i przewidywalnym na tle kryptowalut. Bitcoin oraz Ethereum charakteryzują się gigantyczną zmiennością, a ich rozkład na wykresie dowodzi ogromnej skali niepewności rynkowej.Mniejsza zmienność kwotowa LTC wynika z jego niskiej ceny, jednak liczne wartości odstające potwierdzają, że to wciąż instrument znacznie bardziej ryzykowny niż stabilny S&amp;P 500. Liczne punkty odstające to dowód na gwałtowne, ekstremalne skoki cen, które na tradycyjnej giełdzie niemal nie występują. Wyniki te ostatecznie potwierdzają hipotezę: rynek kryptowalut jest wielokrotnie bardziej ryzykowny, a typowe dzienne ruchy cen Bitcoina często przekraczają najbardziej nerwowe momenty na standardowym rynku akcji.</p>
+</section>
+<section id="pandemia-covid-19-jako-katalizator-bezprecedensowej-hossy-rynkowej" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Pandemia COVID-19 jako katalizator bezprecedensowej hossy rynkowej</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projektP_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Analiza okresu 2019–2022 potwierdza, że choć marzec 2020 przyniósł gwałtowny krach na wszystkich rynkach, to późniejsza cyfryzacja i stymulacja gospodarki napędziły historyczne wzrosty. Na wykresie widać wyraźną dominację kryptowalut w fazie odbicia po pandemii. W 2015 roku Litecoin oraz Bitcoin był bardzo tani, jego wzrost do kilkuset dolarów sprawił, że początkowe 100 USD zamieniło się w tysiące dolarów zysku. Ostatecznie dane potwierdzają hipotezę: choć S&amp;P 500 odnotował solidne odbicie i ustanowił nowe historyczne rekordy, to skala zwrotu z inwestycji w kryptowaluty w okresie popandemicznym była o rzędy wielkości wyższa.</p>
+</section>
+<section id="czy-aktywa-cyfrowe-coraz-bardziej-przypominają-rynek-kapitałowy" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Czy Aktywa cyfrowe coraz bardziej przypominają Rynek kapitałowy</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projektP_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Badanym zjawiskiem w niniejszym raporcie jest wzajemna zależność rynków, zwizualizowana za pomocą wykresu rozrzutu (Scatter Plot). Oś pozioma (X) reprezentuje dzienne zwroty indeksu S&amp;P 500.Oś pionowa (Y) w analogiczny pokazuje dzienne zwroty Bitcoina. Analiza danych potwierdza, że Bitcoin przestał być aktywem całkowicie niezależnym. Widoczna na wykresie czerwona linia trendu pnie się w górę, co jest bezpośrednim dowodem na występowanie dodatniej korelacji. Oznacza to, że oba rynki coraz częściej reagują na te same sygnały makroekonomiczne. Wizualizacja ujawnia jednak istotną asymetrię w dynamice tych ruchów Bitcoin reaguje na te same impulsy co giełda, ale z kilkukrotnie większą amplitudą. Można to zauważyć, porównując skale osi: podczas gdy punkty dla S&amp;P 500 skupiają się głównie w wąskim przedziale +/- 3%, punkty Bitcoina są rozproszone pionowo w znacznie szerszym zakresie, sięgającym +/- 10% lub więcej. Kryptowaluty oferują tym samym wyższy potencjał zysku przy radykalnie większym ryzyku spadków.</p>
+</section>
+<section id="analiza-częstotliwości-występowania-ekstremalnych-szoków-rynkowych" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Analiza częstotliwości występowania ekstremalnych szoków rynkowych</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projektP_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Wykres słupkowy podlicza dni od 2015 roku, w których cena danego aktywa zmieniła się o ponad 5% w ciągu jednej doby. Takie “szoki” cenowe są rzadkością na tradycyjnej giełdzie S&amp;P 500, co potwierdza jej stabilność i czyni ją idealnym miejscem do spokojnego, długoterminowego inwestowania w modelu “kup i trzymaj”. Zupełnie inny obraz wyłania się z analizy kryptowalut – wysokie słupki dla Bitcoina, Ethereum i Litecoina pokazują, że gwałtowne skoki i spadki są tam codziennością. Ta ogromna dynamika sprawia, że kryptowaluty są doskonałym narzędziem do aktywnego tradingu, dając szansę na wypracowanie zysków w krótkim czasie, co na tradycyjnej giełdzie jest niemal niemożliwe. Podsumowując, wykres ten udowadnia, że podczas gdy giełda jest fundamentem stabilnego portfela, kryptowaluty są paliwem dla traderów szukających okazji w codziennej zmienności rynku.</p>
+</section>
+<section id="analiza-odporności-na-straty-jak-duże-były-spadki-kapitału-i-jak-długo-trwało-ich-odrobienie." class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> <strong>Analiza odporności na straty</strong> – jak duże były spadki kapitału i jak długo trwało ich odrobienie.</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projektP_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Wykres obszarowy przedstawia historię strat, pokazując, o ile procent cena każdego aktywa była niższa od swojego ostatniego rekordu w danym momencie. Analiza ta w pełni potwierdza hipotezę o ekstremalnym ryzyku kryptowalut. Podczas gdy indeks S&amp;P 500 rzadko spada poniżej poziomu -20% i zazwyczaj relatywnie szybko odrabia straty, kryptowaluty takie jak Bitcoin czy Ethereum regularnie doświadczają spadków rzędu -50%, a nawet -80%. Wizualizacja pokazuje, że inwestorzy krypto spędzają znacznie więcej czasu „pod wodą”, czekając latami na powrót ceny do poprzedniego szczytu. Wykres ten jest najlepszym dowodem na to, że ogromne zyski z kryptowalut są okupione gigantycznym obciążeniem psychicznym – inwestor musi być gotowy na zaakceptowanie faktu, że jego portfel może stracić większość wartości i nie odrobić tego przez bardzo długi czas. S&amp;P 500 na tym tle wygląda jak stabilny fundament, który zapewnia ochronę kapitału nawet w trudnych okresach rynkowych.</p>
+</section>
+<section id="akcje-i-kryptowaluty-jako-komplementarne-elementy-portfela-inwestycyjnego" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Akcje i kryptowaluty jako komplementarne elementy portfela inwestycyjnego</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projektP_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Utworzona macierz korelacji potwierdza, że kryptowaluty stanowią odrębną klasę aktywów względem tradycyjnej giełdy. Podczas gdy cyfrowe waluty są ze sobą silnie powiązane (współczynnik powyżej 0.75, ich korelacja z indeksem S&amp;P 500 pozostaje na niskim poziomie (ok. 0.28). Dzięki temu, że S&amp;P 500 i kryptowaluty rzadko spadają z tych samych powodów w tym samym czasie, łączny portfel będzie miał łagodniejsze wahania niż portfel składający się z samych kryptowalut.</p>
+</section>
+<section id="bezpieczeństwo-lokaty-bankowej-a-potencjał-rynku-giełdowego" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Bezpieczeństwo lokaty bankowej a potencjał rynku giełdowego</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="projektP_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Analiza porównawcza kwoty 10 000 USD zainwestowanej w 2015 roku pokazuje ogromną różnicę w końcowym majątku w zależności od wybranej strategii. Po 8 latach inwestor dysponuje kwotą około 15 000 USD. Jest to zysk pewny, który nie kosztował inwestora żadnego stresu, jednak ledwo chronił kapitał przed inflacją. Zupełnie inaczej wygląda sytuacja w przypadku S&amp;P 500. Choć linia giełdy jest “poszarpana” i widać na niej bolesne spadki . Ten sam kapitał 10 000 USD urósł na giełdzie do poziomu ponad 25 000 USD. Oznacza to, że cierpliwy inwestor, który zaakceptował ryzyko i wahania kursu, zarobił o 10 000 USD więcej niż osoba trzymająca pieniądze w banku. „Przeciętny inwestor, który po prostu regularnie kupuje fundusz indeksowy S&amp;P 500, w długim terminie osiągnie lepsze wyniki niż większość profesjonalistów. Kluczem nie jest unikanie ryzyka, lecz cierpliwość”. — <em>Warren Buffett</em></p>
+</section>
+<section id="podsumowanie" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Podsumowanie</h1>
+<p>Analiza wykazała, że kryptowaluty oferują potężne zyski, lecz wymagają akceptacji drastycznej zmienności i spadków sięgających 80%. Indeks S&amp;P 500 pozostaje fundamentem stabilności, systematycznie pokonując lokaty bankowe w długim terminie. Kluczowym wnioskiem jest niska korelacja (0,28) między tymi aktywami, co dowodzi, że giełda i krypto to odrębne światy inwestycyjne. Taka zależność sprawia, że portfel mieszany jest najbardziej efektywnym rozwiązaniem. Pozwala on na skuteczną dywersyfikację, łącząc bezpieczeństwo tradycyjnych akcji z wysoką dynamiką aktywów cyfrowych, co ostatecznie optymalizuje stosunek zysku do ryzyka.</p>
+</section>
+<section id="bibliografia" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Bibliografia</h1>
+<p><strong>Yahoo Finance (2024)</strong>. <em>Historical Market Data: S&amp;P 500 Index (^GSPC), Bitcoin (BTC-USD), Ethereum (ETH-USD), Litecoin (LTC-USD).</em> Dane historyczne za lata 2015–2023 pobrane automatycznie przy użyciu interfejsu API. Dostępne na: <a href="https://finance.yahoo.com" class="uri">https://finance.yahoo.com</a>.</p>
+<p><strong>Buffett, W. E. (2013).</strong> <em>Berkshire Hathaway Inc.&nbsp;Annual Report: Letter to Shareholders.</em> Omaha, NE. (Źródło cytatu dotyczącego efektywności inwestowania w indeks S&amp;P 500 względem bezpiecznych aktywów gotówkowych).</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<script src="projektP_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
